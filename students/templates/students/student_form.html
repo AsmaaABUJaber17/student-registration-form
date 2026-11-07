@@ -1,0 +1,36 @@
+{% extends 'students/base.html' %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1 data-en="Student Registration">Student Registration</h1>
+    <p class="subtitle" data-en="Please fill in the student information below.">Please fill in the student information below.</p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" data-en="{{ field.label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                {% endif %}
+                
+                <!-- رسائل الخطأ مع data-en -->
+                {% for error in field.errors %}
+                    <p class="error" data-en="{{ error }}">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+            <div class="error">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <button type="submit" data-en="Save Student">Save Student</button>
+        <a class="text-link" href="{% url 'student_list' %}" data-en="View Students">View Students</a>
+    </form>
+</section>
+{% endblock %}

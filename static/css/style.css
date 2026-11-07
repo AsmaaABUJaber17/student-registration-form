@@ -1,0 +1,215 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f5f8;
+    color: #263238;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 45px auto;
+}
+
+.card, .table-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+}
+
+.card {
+    max-width: 650px;
+    margin: auto;
+}
+
+h1 {
+    margin: 0 0 8px;
+    color: #20364b;
+}
+
+.subtitle {
+    margin: 0 0 25px;
+    color: #718096;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccd4dd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2878a8;
+}
+
+button, .button-link {
+    display: inline-block;
+    border: 0;
+    border-radius: 6px;
+    background: #2878a8;
+    color: white;
+    padding: 12px 19px;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover, .button-link:hover {
+    background: #1d5f88;
+}
+
+.text-link {
+    margin-left: 12px;
+    color: #2878a8;
+    text-decoration: none;
+}
+
+.error {
+    margin: 6px 0 0;
+    color: #c0392b;
+    font-size: 13px;
+}
+
+.message {
+    margin-bottom: 18px;
+    padding: 12px;
+    border-radius: 6px;
+    background: #e3f5e9;
+    color: #216b3a;
+}
+
+.table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e9ee;
+    text-align: left;
+}
+
+th {
+    background: #edf3f7;
+    color: #20364b;
+}
+
+tr:hover td {
+    background: #fafcfd;
+}
+
+.student-image {
+    width: 65px;
+    height: 65px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.empty {
+    padding: 25px;
+    text-align: center;
+    color: #718096;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px auto;
+    }
+
+    .card, .table-card {
+        padding: 18px;
+    }
+
+    .table-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* ====== Language Switcher ====== */
+/* ====== Language Switcher (أنيق وداخل الصفحة) ====== */
+.lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-radius: 30px;
+    width: fit-content;
+    margin-left: auto;
+    border: 1px solid #e0e0e0;
+}
+
+/* في حالة RTL، نحركه لليسار */
+[dir="rtl"] .lang-switch {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.lang-option {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-option:hover {
+    background: #e9ecef;
+    color: #2c3e50;
+}
+
+.lang-option.active {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+}
+
+.flag {
+    font-size: 16px;
+}
+
+.divider {
+    color: #ccc;
+    font-size: 14px;
+}

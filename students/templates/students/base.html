@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Registration{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <main class="container">
+        
+
+        <div class="lang-switch">
+            <button onclick="changeLang('en')" id="en-btn" class="lang-option">
+                <span class="flag">🇬🇧</span> EN
+            </button>
+            <span class="divider">|</span>
+            <button onclick="changeLang('ar')" id="ar-btn" class="lang-option">
+                <span class="flag">🇵🇸</span> AR
+            </button>
+        </div>
+
+        <!-- عرض رسائل النجاح أو الخطأ من Django -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+        <!-- هنا بيتم حقن محتوى الصفحات التانية  -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        
+        const dict = {
+            "Student Registration": "تسجيل طالب",
+            "Please fill in the student information below.": "يرجى تعبئة معلومات الطالب أدناه.",
+            "Save Student": "حفظ الطالب",
+            "View Students": "عرض الطلاب",
+            "Students List": "قائمة الطلاب",
+            "All registered students": "جميع الطلاب المسجلين",
+            "Add New Student": "إضافة طالب جديد",
+            "Name": "الاسم",
+            "University ID": "الرقم الجامعي",
+            "National ID": "رقم الهوية",
+            "Mobile Number": "رقم الجوال",
+            "Address": "العنوان",
+            "Date of Birth": "تاريخ الميلاد",
+            "Image": "الصورة",
+            "Full Name": "الاسم الكامل",
+            "ID Number": "رقم الهوية",
+            "Image (JPG or PNG)": "الصورة (JPG أو PNG)",
+            "No students have been added yet.": "لا يوجد طلاب مضافين حالياً.",
+            "No image": "لا توجد صورة",
+            "Student has been added successfully.": "تمت إضافة الطالب بنجاح.",
+            
+            // ترجمة رسائل الخطأ عشان تظهر عربي لما يغلط المستخدم
+            "Name must contain letters and spaces only.": "الاسم يجب أن يحتوي على حروف ومسافات فقط.",
+            "University ID must contain 9 digits and start with 1 or 2.": "الرقم الجامعي يجب أن يحتوي على 9 أرقام ويبدأ بـ 1 أو 2.",
+            "ID Number must contain 9 digits and start with 9, 8, or 4.": "رقم الهوية يجب أن يحتوي على 9 أرقام ويبدأ بـ 9 أو 8 أو 4.",
+            "Mobile number must be 10 digits and start with 059 or 056.": "رقم الجوال يجب أن يحتوي على 10 أرقام ويبدأ بـ 059 أو 056.",
+            "Address must not exceed 150 characters.": "العنوان يجب ألا يتجاوز 150 حرفاً.",
+            "Select a valid choice. That choice is not one of the available choices.": "اختر خياراً صالحاً. هذا الاختيار ليس من الخيارات المتاحة."
+        };
+
+        // الدالة الرئيسية لتبديل اللغة
+        function changeLang(lang) {
+            // حفظ اختيار المستخدم في المتصفح عشان ما يضيع لما يعمل refresh
+            localStorage.setItem("myLang", lang);
+
+            // تغيير اتجاه الصفحة واللغة في وسم HTML
+            if (lang === "ar") {
+                document.documentElement.setAttribute("dir", "rtl");
+                document.documentElement.setAttribute("lang", "ar");
+            } else {
+                document.documentElement.setAttribute("dir", "ltr");
+                document.documentElement.setAttribute("lang", "en");
+            }
+
+           
+            document.querySelectorAll("[data-en]").forEach(function(el) {
+                let text = el.getAttribute("data-en");
+                el.textContent = (lang === "ar" && dict[text]) ? dict[text] : text;
+            });
+
+        
+            document.querySelectorAll("[data-placeholder-en]").forEach(function(el) {
+                let text = el.getAttribute("data-placeholder-en");
+                el.placeholder = (lang === "ar" && dict[text]) ? dict[text] : text;
+            });
+
+        
+            document.getElementById("en-btn").classList.toggle("active", lang === "en");
+            document.getElementById("ar-btn").classList.toggle("active", lang === "ar");
+        }
+
+        // أول ما الصفحة تفتح، شوف إذا في لغة محفوظة مسبقاً، لو لا خليها إنجليزي
+        window.onload = function() {
+            let savedLang = localStorage.getItem("myLang") || "en";
+            changeLang(savedLang);
+        };
+    </script>
+
+</body>
+</html>
